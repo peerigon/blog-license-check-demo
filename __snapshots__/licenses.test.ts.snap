@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot package licenses 1`] = `
+[
+  "@types/jest: MIT",
+  "@types/node: MIT",
+  "@types/prettier: MIT",
+  "@types/react-dom: MIT",
+  "@types/react: MIT",
+  "@vitejs/plugin-react: MIT",
+  "jest: MIT",
+  "license-checker-rseidelsohn: BSD-3-Clause",
+  "react-dom: MIT",
+  "react: MIT",
+  "ts-jest: MIT",
+  "typescript: Apache-2.0",
+  "vite: MIT",
+]
+`;

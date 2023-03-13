@@ -1,0 +1,21 @@
+name: "🔬 PR: test"
+
+on:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: pnpm/action-setup@v2
+      with:
+        version: 7
+    - name: ☕️ use Node.js
+      uses: actions/setup-node@v3
+      with:
+        cache: 'pnpm'
+    - name: 👀 pnpm install
+      run: pnpm install
+    - name: 🕵️ pnpm test
+      run: pnpm test
