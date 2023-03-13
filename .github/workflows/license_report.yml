@@ -21,5 +21,5 @@ jobs:
         title: "chore: update license report"
         body: "# 🦖"
         base: main
-        branch: cloud-update-advanced-params
+        branch: update-license-reports
         delete-branch: true
