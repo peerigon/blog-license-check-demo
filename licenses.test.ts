@@ -75,10 +75,6 @@ test("all licenses are allowed", async () => {
 
 test("snapshot package licenses", async () => {
 	expect(
-		// dissect the info
-		packages.map(({ licenses, name }) => {
-			// put to a string `name: LICENSES`
-			return `${name}: ${licenses}`;
-		})
+		packages.map(({ licenses, name }) => `${name}: ${licenses}`)
 	).toMatchSnapshot();
 });
