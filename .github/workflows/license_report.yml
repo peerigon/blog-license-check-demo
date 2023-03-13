@@ -11,10 +11,10 @@ jobs:
     steps:
       - name: 🧺 checkout
         uses: actions/checkout@v3
-      - name: 📌 npm install
-        run: npm ci --prefer-offline --no-audit
+      - name: 📌 pnpm install
+        run: pnpm ci --prefer-offline --no-audit
       - name: 🦖 generate report
-        run: npx license-checker-rseidelsohn --markdown > LICENSES.md
+        run: pnpx license-checker-rseidelsohn --markdown > LICENSES.md
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
