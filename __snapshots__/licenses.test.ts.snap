@@ -4,7 +4,6 @@ exports[`snapshot package licenses 1`] = `
 [
   "@types/jest: MIT",
   "@types/node: MIT",
-  "@types/prettier: MIT",
   "@types/react-dom: MIT",
   "@types/react: MIT",
   "@vitejs/plugin-react: MIT",
