@@ -1,12 +1,14 @@
 import { init } from "license-checker-rseidelsohn";
 import { promisify } from "util";
-import type { ModuleInfo, ModuleInfos } from "license-checker-rseidelsohn";
 
 const checkLicenses = promisify(init);
 
-let licenses: ModuleInfos = {};
+type Info = { name: string; licenses: string[] };
+
+let packages: Array<Info>;
+
 beforeAll(async () => {
-	licenses = await checkLicenses({
+	const rawResult = await checkLicenses({
 		// start at the root of our project
 		start: ".",
 
@@ -18,19 +20,32 @@ beforeAll(async () => {
 		//  🚨 this enables only checking direct dependencies!
 		direct: 0 as any,
 	});
+
+	packages = Object.entries(rawResult).map(([rawName, result]) => {
+		// e.g. @foo/bar@1.2.3 => ["", "foo/bar", "1.2.3"]
+		const parts = rawName.split("@");
+		const name = parts.slice(0, -1).join("@"); // @foo/bar
+
+		// license-checker supports multiple licenses per package:
+		const licenses = result.licenses ?? ["UNLICENSED"];
+
+		return {
+			name,
+			// license-checker supports multiple licenses per package:
+			licenses: Array.isArray(licenses) ? licenses : [licenses],
+		};
+	});
+	// License compilation might take a bit, so we don't want to run into Jest's 5s timeout
 }, 30000);
 
 const LICENSE_ALLOW_LIST = ["UNLICENSED", "MIT", "BSD-3-Clause", "Apache-2.0"];
 
 expect.extend({
 	// using a custom matcher for better output when a test fails
-	toBeValidLicense: ({ licenses }: ModuleInfo, name: string) => {
-		// license-checker supports multiple licenses per package:
-		const licensesArray = Array.isArray(licenses) ? licenses : [licenses];
-
+	toBeValidLicense: ({ licenses, name }: Info) => {
 		// 🚨 this is the important part:
 		// pass this test, when every license of the package is in the allow list
-		const pass = licensesArray.every(
+		const pass = licenses.every(
 			(license) => license && LICENSE_ALLOW_LIST.includes(license)
 		);
 
@@ -38,7 +53,7 @@ expect.extend({
 			pass,
 			// display this message with enough info
 			message: () =>
-				`"${licensesArray.join(",")}" is ${
+				`"${licenses.join(",")}" is ${
 					pass ? "" : "not "
 				}an allowed license (dependency: ${name})`,
 		};
@@ -49,26 +64,17 @@ expect.extend({
 declare global {
 	namespace jest {
 		interface Matchers<R> {
-			toBeValidLicense(name: string): R;
+			toBeValidLicense(): R;
 		}
 	}
 }
 
 test("all licenses are allowed", async () => {
-	Object.entries(licenses).forEach(([name, info]) =>
-		expect(info).toBeValidLicense(name)
-	);
+	packages.forEach((info) => expect(info).toBeValidLicense());
 });
 
 test("snapshot package licenses", async () => {
 	expect(
-		// dissect the info
-		Object.entries(licenses).map(([nameAndVersion, { licenses }]) => {
-			// We don't want the version number in the snapshot, this changes too often
-			// extract the name from name@1.2.3
-			const name = nameAndVersion.split("@").slice(0, -1).join("@");
-			// put to a string `name: LICENSES`
-			return `${name}: ${licenses}`;
-		})
+		packages.map(({ licenses, name }) => `${name}: ${licenses}`)
 	).toMatchSnapshot();
 });
