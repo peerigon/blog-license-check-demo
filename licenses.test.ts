@@ -7,8 +7,16 @@ const checkLicenses = promisify(init);
 let licenses: ModuleInfos = {};
 beforeAll(async () => {
 	licenses = await checkLicenses({
+		// start at the root of our project
 		start: ".",
-		excludePrivatePackages: true,
+
+		// we don't need to check our own license
+		excludePackages: "blog-license-check-demo",
+
+		// There's a bug in license-checker-rseidelsohn
+		// => https://github.com/RSeidelsohn/license-checker-rseidelsohn/issues/35
+		//  🚨 this enables only checking direct dependencies!
+		direct: 0 as any,
 	});
 }, 30000);
 
