@@ -1,0 +1,15 @@
+- [@types/jest@29.4.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@18.15.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/prettier@2.7.2](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/react-dom@18.0.11](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/react@18.0.28](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@vitejs/plugin-react@3.1.0](https://github.com/vitejs/vite-plugin-react) - MIT
+- [blog-license-check-demo@1.0.0](undefined) - UNLICENSED
+- [jest@29.5.0](https://github.com/facebook/jest) - MIT
+- [license-checker-rseidelsohn@4.1.1](https://github.com/RSeidelsohn/license-checker-rseidelsohn) - BSD-3-Clause
+- [react-dom@18.2.0](https://github.com/facebook/react) - MIT
+- [react@18.2.0](https://github.com/facebook/react) - MIT
+- [ts-jest@29.0.5](https://github.com/kulshekhar/ts-jest) - MIT
+- [typescript@4.9.5](https://github.com/Microsoft/TypeScript) - Apache-2.0
+- [vite@4.1.4](https://github.com/vitejs/vite) - MIT
+
