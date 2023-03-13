@@ -13,7 +13,7 @@ jobs:
     - name: 👀 npm install
       run: npm install
     - name: 🦖 generate report
-      run: npx license-checker-rseidelsohn --markdown > LICENSES.md
+      run: npx license-checker-rseidelsohn --markdown --direct > LICENSES.md
     - name: ✨ create Pull Request
       uses: peter-evans/create-pull-request@v4
       with:
