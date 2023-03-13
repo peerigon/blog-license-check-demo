@@ -1,6 +1,5 @@
 - [@types/jest@29.4.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/node@18.15.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/prettier@2.7.2](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/react-dom@18.0.11](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/react@18.0.28](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@vitejs/plugin-react@3.1.0](https://github.com/vitejs/vite-plugin-react) - MIT
