@@ -10,17 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - uses: pnpm/action-setup@v2
-      with:
-        version: 7
-    - name: ☕️ use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        cache: 'pnpm'
-    - name: 👀 pnpm install
-      run: pnpm install
+    - name: 👀 npm install
+      run: npm install
     - name: 🦖 generate report
-      run: pnpx license-checker-rseidelsohn --markdown > LICENSES.md
+      run: npx license-checker-rseidelsohn --markdown > LICENSES.md
     - name: ✨ create Pull Request
       uses: peter-evans/create-pull-request@v4
       with:
